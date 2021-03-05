@@ -18,9 +18,11 @@ public class DriverManager {
 
 	public static WindowsDriver<WindowsElement> pruebaCalculadoraWindows() throws MalformedURLException {
 	  try {
-	  	String command = "C:\\Program Files (x86)\\Windows Application Driver\\WinAppDriver.exe";
-	  	ProcessBuilder builder = new ProcessBuilder(command).inheritIO();
-	  	p = builder.start();
+		  //Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", "build.bat"});
+		  Process p = Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", "build.bat"});
+	  	//String command = "C:\\Program Files (x86)\\Windows Application Driver\\WinAppDriver.exe";//String command = "C:\\Program Files\\WinRAR\\WinRAR.exe";
+	  	//ProcessBuilder builder = new ProcessBuilder(command).inheritIO();
+	  	//p = builder.start();
 	  	DesiredCapabilities capabilities;
 	      capabilities = new DesiredCapabilities();
 	      capabilities.setCapability("app", "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
@@ -28,9 +30,9 @@ public class DriverManager {
 	      capabilities.setCapability("platformName", "Windows");
 	      clientSession = new WindowsDriver<WindowsElement>(new URL("http://127.0.0.1:4723"), capabilities);
 	      clientSession.manage().timeouts().implicitlyWait(68, TimeUnit.SECONDS);
-
+	       
 	  } catch (Exception e) {
-		  System.out.println(e.getMessage());
+	  	System.out.println(e.getMessage());
 	  }
 	  	return clientSession;
 	}
